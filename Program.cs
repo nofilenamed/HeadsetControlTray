@@ -21,6 +21,7 @@ namespace HeadsetControlTray
 
             using (TrayIcon pi = new TrayIcon())
             {
+
                 pi.Display();
                 Application.Run();
             }
@@ -109,7 +110,7 @@ namespace HeadsetControlTray
 
             ProcessStartInfo psi = new ProcessStartInfo()
             {
-                FileName = "./headsetcontrol.exe",
+                FileName = AppDomain.CurrentDomain.BaseDirectory + "/headsetcontrol.exe",
                 Arguments = args,
                 CreateNoWindow = true,
                 ErrorDialog = false,
