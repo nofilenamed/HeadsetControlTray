@@ -76,12 +76,16 @@ namespace HeadsetControlTray
             string result = "";
             if (value == -100)
             {
-                result = "(Off)";
+                result = "Offline";
                 color = Color.LightGray;
             }
             else if (value == 0)
             {
-
+            }
+            else if (value == -1)
+            {
+                result = "Charging";
+                color = Color.DeepSkyBlue;
             }
             else if (value <= 15)
             {
@@ -100,7 +104,7 @@ namespace HeadsetControlTray
             }
 
 
-            m_NotifyIcon.Text = k_TrayName + (string.IsNullOrEmpty(result) ? "" : ' ' + result);
+            m_NotifyIcon.Text = k_TrayName + '\n' + (string.IsNullOrEmpty(result) ? "" : ' ' + result);
             return color;
         }
 
