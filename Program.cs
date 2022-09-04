@@ -104,7 +104,7 @@ namespace HeadsetControlTray
             }
 
 
-            m_NotifyIcon.Text = k_TrayName + '\n' + (string.IsNullOrEmpty(result) ? "" : ' ' + result);
+            m_NotifyIcon.Text = k_TrayName + '\n' + result;
             return color;
         }
 
