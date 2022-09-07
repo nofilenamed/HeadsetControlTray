@@ -42,31 +42,38 @@ namespace HeadsetControlTray
 
         const string k_TrayName = "Headset";
 
+        private int m_LastStatus = int.MaxValue;
+
         public void SetIcon(int status)
         {
-            int width = m_Bitmap.Width;
-            int height = m_Bitmap.Height;
-
-            Debug.WriteLine(status);
-
-            Color color = HandleStatus(status);
-
-            for (int y = 0; y < height; y++)
+            if (m_LastStatus != status)
             {
-                for (int x = 0; x < width; x++)
+                int width = m_Bitmap.Width;
+                int height = m_Bitmap.Height;
+
+                Debug.WriteLine(status);
+
+                Color color = HandleStatus(status);
+
+                for (int y = 0; y < height; y++)
                 {
-                    Color p = m_Bitmap.GetPixel(x, y);
-                    if (p.A == 255)
+                    for (int x = 0; x < width; x++)
                     {
-                        m_Bitmap.SetPixel(x, y, color);
+                        Color p = m_Bitmap.GetPixel(x, y);
+                        if (p.A == 255)
+                        {
+                            m_Bitmap.SetPixel(x, y, color);
+                        }
                     }
                 }
-            }
 
-            IntPtr pIcon = m_Bitmap.GetHicon();
-            using (var icon = Icon.FromHandle(pIcon))
-            {
-                m_NotifyIcon.Icon = icon;
+                IntPtr pIcon = m_Bitmap.GetHicon();
+                using (var icon = Icon.FromHandle(pIcon))
+                {
+                    m_NotifyIcon.Icon = icon;
+                }
+
+                m_LastStatus = status;
             }
         }
 
