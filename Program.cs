@@ -67,10 +67,17 @@ namespace HeadsetControlTray
                     }
                 }
 
-                IntPtr pIcon = m_Bitmap.GetHicon();
-                using (var icon = Icon.FromHandle(pIcon))
+                try
                 {
-                    m_NotifyIcon.Icon = icon;
+                    IntPtr pIcon = m_Bitmap.GetHicon();
+                    using (var icon = Icon.FromHandle(pIcon))
+                    {
+                        m_NotifyIcon.Icon = icon;
+                    }
+                }
+                catch
+                {
+
                 }
 
                 m_LastStatus = status;
